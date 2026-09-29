@@ -4,7 +4,7 @@
 
 ### A Security Assessment of 20 Deep Learning Tumour Detectors in Brain MRI and Kidney CT
 
-**Oudoum Ali Houmed** · Gazi University, Ankara, Turkey
+**Oudoum Ali Houmed**
 
 [![Paper](https://img.shields.io/badge/Paper-PDF-b31b1b?style=flat-square)](paper/adversarial-threats-medical-ai.pdf)
 [![Python](https://img.shields.io/badge/Python-3.9%E2%80%933.11-3776AB?style=flat-square&logo=python&logoColor=white)](#-reproducing-the-experiments)
@@ -21,24 +21,24 @@
 
 ---
 
-## 📌 TL;DR
+## TL;DR
 
 Deep learning models now detect tumours on medical images with **96–100 % accuracy**. This project shows that the same models can be made to fail **silently and almost completely** by adding noise that no human can see.
 
 | | Result |
 |---|---|
-| 🧠 **Clean accuracy** | Every one of the 20 models exceeds **96 %** (17 of 20 CT models reach 100 %) |
-| ⚡ **One FGSM step, ε = 0.05** | Average accuracy drops by **54.3 points on MRI** and **77.6 points on CT** |
-| 🎯 **Five PGD steps, ε = 0.10** | **19 / 20 MRI** models and **all 20 CT** models fall to **0 – 1.7 %** accuracy |
-| 🏥 **Modality matters** | MRI models are **~2× more robust** than CT models (Wilcoxon, *p*<sub>Holm</sub> < 0.05 in all 6 comparisons) |
-| 🏗️ **Architecture matters, a little** | Inception backbones are most robust (InceptionV3: 37.6 %), MobileNetV3Small the least (8.1 %) – a **4.6× spread**, yet **no model is safe** at ε = 0.10 |
-| 👁️ **Image quality ≠ attack strength** | At the *same* SSIM ≈ 0.75, FGSM leaves 22–44 % accuracy while PGD leaves **< 3 %** – quality-metric detectors cannot tell them apart |
+|  **Clean accuracy** | Every one of the 20 models exceeds **96 %** (17 of 20 CT models reach 100 %) |
+|  **One FGSM step, ε = 0.05** | Average accuracy drops by **54.3 points on MRI** and **77.6 points on CT** |
+|  **Five PGD steps, ε = 0.10** | **19 / 20 MRI** models and **all 20 CT** models fall to **0 – 1.7 %** accuracy |
+|  **Modality matters** | MRI models are **~2× more robust** than CT models (Wilcoxon, *p*<sub>Holm</sub> < 0.05 in all 6 comparisons) |
+|  **Architecture matters, a little** | Inception backbones are most robust (InceptionV3: 37.6 %), MobileNetV3Small the least (8.1 %) – a **4.6× spread**, yet **no model is safe** at ε = 0.10 |
+|  **Image quality ≠ attack strength** | At the *same* SSIM ≈ 0.75, FGSM leaves 22–44 % accuracy while PGD leaves **< 3 %** – quality-metric detectors cannot tell them apart |
 
 > **Bottom line:** choosing a "better" network is a mitigation, not a defence. Clinical AI needs explicit defences (e.g. adversarial training) **and** integrity protection of the whole imaging pipeline.
 
 ---
 
-## 📚 Table of contents
+## Table of contents
 
 1. [Why this matters](#-why-this-matters)
 2. [Threat model](#-threat-model)
@@ -54,7 +54,7 @@ Deep learning models now detect tumours on medical images with **96–100 % accu
 
 ---
 
-## 🩺 Why this matters
+##  Why this matters
 
 Radiology is one of the areas where AI is already deployed: in 2018 the US FDA approved the first **autonomous** AI diagnostic device. Deployment changes the risk:
 
@@ -67,7 +67,7 @@ Earlier studies usually looked at **one** modality, **a few** models or **one** 
 
 ---
 
-## 🛡️ Threat model
+##  Threat model
 
 <p align="center">
   <img src="assets/paper-figures/fig1-threat-model.png" width="640" alt="Threat model: the adversary can modify pixels at the PACS/DICOM store, pre-processing or inference host before the CNN classifier">
@@ -91,7 +91,7 @@ White-box is the **strongest realistic** attacker, so the results are an **upper
 
 ---
 
-## 🔬 Study design
+##  Study design
 
 <p align="center">
   <img src="assets/paper-figures/fig2-pipeline.png" alt="End-to-end pipeline: data preparation, identical transfer learning for 20 backbones, then white-box attack generation and evaluation">
@@ -155,7 +155,7 @@ Every model is evaluated on the clean test set and under all 6 attack settings: 
 
 ---
 
-## ⚔️ How the attacks work
+##  How the attacks work
 
 Both attacks use the **gradient of the loss with respect to the input image**, $\nabla_x J(\theta, x, y)$. It shows which way each pixel should move to make the model more wrong.
 
@@ -177,7 +177,7 @@ Because it follows the loss surface, PGD finds a **far more damaging point insid
 
 ---
 
-## 📊 Results
+## Results
 
 ### 1. Clean baselines: near-perfect
 
@@ -309,7 +309,7 @@ Each panel shows the original image, the perturbation pattern, and the adversari
 
 ---
 
-## ⚠️ Limitations
+##  Limitations
 
 1. **Patient-level leakage:** the split is stratified by class but not grouped by patient (the public datasets have no patient IDs). Clean accuracies, especially 100 % on CT, should be read as an **upper bound**. All adversarial comparisons are paired within a dataset, which limits the impact.
 2. **Single training run:** each architecture was trained once per dataset, so seed variance is not separated from architectural robustness.
@@ -320,7 +320,7 @@ Each panel shows the original image, the perturbation pattern, and the adversari
 
 ---
 
-## 📁 Repository structure
+##  Repository structure
 
 ```
 adversarial-threats-medical-ai/
@@ -353,7 +353,7 @@ adversarial-threats-medical-ai/
 
 ---
 
-## 🧩 Code walkthrough
+##  Code walkthrough
 
 The experiments were first run in Google Colab notebooks: one notebook per dataset × attack, plus an image-similarity notebook per dataset. Their cells were repeated for each of the 20 models. For this repository the code was converted into a small **Python package** plus **four scripts**. They keep the same logic and hyper-parameters, with a single loop over the backbones.
 
@@ -443,7 +443,7 @@ for each backbone:
 
 ---
 
-## 🚀 Reproducing the experiments
+##  Reproducing the experiments
 
 ### 1. Install
 
@@ -515,7 +515,7 @@ With `MEDATTACK_ROOT` set, the datasets are read from `<MEDATTACK_ROOT>/data/` a
 
 ---
 
-## 📖 Citation
+##  Citation
 
 If you use this code or the benchmark results, please cite:
 
@@ -532,11 +532,11 @@ If you use this code or the benchmark results, please cite:
 
 ---
 
-## 👤 Author
+##  Author
 
 **Oudoum Ali Houmed**
 GitHub: [@OudoumAlihoumed](https://github.com/OudoumAlihoumed)
 
-## 📄 License
+##  License
 
 The **code** is released under the [MIT License](LICENSE). The **paper** and its figures are © Oudoum Ali Houmed, all rights reserved. The datasets belong to their original authors; see the Kaggle pages linked above for their licences.
