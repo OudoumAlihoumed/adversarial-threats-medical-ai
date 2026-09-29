@@ -1,0 +1,10 @@
+# Python 3.9 - 3.11. TensorFlow is pinned below 2.16 because the training
+# code relies on Keras 2 behaviour (legacy .h5 saving, Layer.add_loss with callables).
+tensorflow>=2.12,<2.16
+numpy>=1.23,<2.0
+scikit-learn>=1.2
+pandas>=1.5
+matplotlib>=3.6
+seaborn>=0.12
+tqdm>=4.64
+sewar==0.4.6

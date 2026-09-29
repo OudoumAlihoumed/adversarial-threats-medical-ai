@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+message: "If you use this code or the benchmark results, please cite the paper."
+title: "Adversarial Threats to Safety-Critical Medical AI: A Security Assessment of 20 Deep Learning Tumour Detectors in Brain MRI and Kidney CT"
+authors:
+  - family-names: "Ali Houmed"
+    given-names: "Oudoum"
+    affiliation: "Gazi University, Ankara, Turkey"
+repository-code: "https://github.com/OudoumAlihoumed/adversarial-threats-medical-ai"
+license: MIT
+keywords:
+  - adversarial machine learning
+  - medical image analysis
+  - AI safety
+  - FGSM
+  - PGD
+  - transfer learning
+  - tumour detection
