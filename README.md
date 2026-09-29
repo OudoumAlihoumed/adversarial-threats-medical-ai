@@ -534,7 +534,7 @@ If you use this code or the benchmark results, please cite:
 
 ## 👤 Author
 
-**Oudoum Ali Houmed**, Gazi University, Ankara, Turkey
+**Oudoum Ali Houmed**
 GitHub: [@OudoumAlihoumed](https://github.com/OudoumAlihoumed)
 
 ## 📄 License
