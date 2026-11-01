@@ -3,7 +3,7 @@
 Both attacks follow the implementation used to produce the paper's results.
 Images are float arrays in [0, 1]; the models output softmax probabilities,
 so the loss is sparse categorical cross-entropy on probabilities.
-"""
+""" 
 
 import numpy as np
 import tensorflow as tf
